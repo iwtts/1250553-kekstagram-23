@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Арсений Берзин](https://up.htmlacademy.ru/javascript/23/user/1250553).
-* Наставник: `Неизвестно`.
+* Наставник: [RAMAN LAURYNIUK](https://htmlacademy.ru/profile/id1666565).
 
 ---
 
