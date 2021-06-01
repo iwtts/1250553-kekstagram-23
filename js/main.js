@@ -19,3 +19,14 @@ function getRandomIntInclusive(from, to) {
 }
 
 getRandomIntInclusive();
+
+
+//Функция для проверки максимальной длины строки.
+
+function checkStringLength (string, maxLength) {
+  string = String(string);
+  return (string.length <= maxLength);
+}
+
+checkStringLength ();
+
