@@ -7,15 +7,17 @@ const createIdArray = function (maxValue) {
   const numbers = [];
   let total = 0;
   while(total < maxValue) {
-    const i = Math.floor(Math.random() * maxValue);
-    if(keys[i] === undefined) {
-      keys[i] = 1;
-      numbers.push(i);
+    const ii = Math.floor(Math.random() * maxValue);
+    if(keys[ii] === undefined) {
+      keys[ii] = 1;
+      numbers.push(ii);
       total++;
     }
   }
   return numbers;
 };
+
+//ESLint почему-то ругался на переменную 'i'(слишком короткая), так и должно быть?
 
 const PHOTO_ID_ARRAY = createIdArray(PHOTOS_COUNT);
 const COMMENTS_ID_ARRAY = createIdArray(COMMENTS_COUNT_TOTAL);
