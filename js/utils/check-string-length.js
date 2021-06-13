@@ -3,3 +3,5 @@ function checkStringLength (string, length) {
 }
 
 checkStringLength ();
+
+export {checkStringLength};
