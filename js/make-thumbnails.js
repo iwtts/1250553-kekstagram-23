@@ -20,4 +20,3 @@ thumbnailPictures.forEach((photo) => {
 });
 
 pictures.appendChild(picturesFragment);
-
