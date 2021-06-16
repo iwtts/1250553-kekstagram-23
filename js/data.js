@@ -1,26 +1,9 @@
-import {getRandomPositiveInteger} from './utils/get-random-positive-integer';
+import {getRandomPositiveInteger} from './utils/get-random-positive-integer.js';
+import {makeUniqueRandomIntegerGenerator} from './utils/make-unique-random-integer-generator.js';
 
 const PHOTOS_COUNT = 25;
 const COMMENTS_COUNT = 3;
-const COMMENTS_COUNT_TOTAL = PHOTOS_COUNT * COMMENTS_COUNT;
-
-const createIdArray = function (maxValue) {
-  const keys = [];
-  const numbers = [];
-  let total = 0;
-  while(total < maxValue) {
-    const ii = Math.floor(Math.random() * maxValue);
-    if(keys[ii] === undefined) {
-      keys[ii] = 1;
-      numbers.push(ii);
-      total++;
-    }
-  }
-  return numbers;
-};
-
-const PHOTO_ID_ARRAY = createIdArray(PHOTOS_COUNT);
-const COMMENTS_ID_ARRAY = createIdArray(COMMENTS_COUNT_TOTAL);
+const COMMENTS_COUNT_MAX = PHOTOS_COUNT * COMMENTS_COUNT;
 
 const COMMENT_MESSAGES = [
   'Всё отлично!',
@@ -39,16 +22,12 @@ const COMMENT_NAMES = [
   'Диана Арбус',
 ];
 
+const getCommentId = makeUniqueRandomIntegerGenerator(0, COMMENTS_COUNT_MAX);
+const getPhotoId = makeUniqueRandomIntegerGenerator(0, PHOTOS_COUNT);
 const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0, elements.length - 1)];
-const getRandomUnicElement = function (elements) {
-  const currentIndex = getRandomPositiveInteger(0, elements.length -1);
-  const element = elements[currentIndex];
-  elements.splice(currentIndex, 1);
-  return element;
-};
 
 const createComment = () => ({
-  id: getRandomUnicElement(COMMENTS_ID_ARRAY),
+  id: getCommentId(),
   avatar: `img/avatar-${  getRandomPositiveInteger(1, 6)  }.svg.`,
   message: getRandomArrayElement(COMMENT_MESSAGES),
   name: getRandomArrayElement(COMMENT_NAMES),
@@ -60,7 +39,7 @@ const createComments = () => {
 };
 
 const createPhoto = () => ({
-  id: getRandomUnicElement(PHOTO_ID_ARRAY),
+  id: getPhotoId(),
   url: `photos/${  getRandomPositiveInteger(1, 25) }.jpg`,
   description: 'Такое искусство, если угодно, оказывается трансперсональным и трансцендентным.',
   likes: getRandomPositiveInteger(15, 200),
@@ -71,7 +50,5 @@ const createPhotos = () => {
   const photos = new Array(PHOTOS_COUNT).fill(null).map(() => createPhoto());
   return photos;
 };
-
-createPhotos();
 
 export {createPhotos};
