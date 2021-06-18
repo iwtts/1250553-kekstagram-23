@@ -1,6 +1,4 @@
-import {checkStringLength, getRandomPositiveInteger} from './utils';
 import {createPhotos} from './data.js';
+import './make-thumbnails.js';
 
-checkStringLength();
-getRandomPositiveInteger();
 createPhotos();
