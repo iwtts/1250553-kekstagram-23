@@ -28,13 +28,13 @@ const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0,
 
 const createComment = () => ({
   id: getCommentId(),
-  avatar: `img/avatar-${  getRandomPositiveInteger(1, 6)  }.svg.`,
+  avatar: `img/avatar-${  getRandomPositiveInteger(1, 6)  }.svg`,
   message: getRandomArrayElement(COMMENT_MESSAGES),
   name: getRandomArrayElement(COMMENT_NAMES),
 });
 
 const createComments = () => {
-  const сomments = new Array(getRandomPositiveInteger(0, COMMENTS_COUNT)).fill(null).map(() => createComment());
+  const сomments = new Array(getRandomPositiveInteger(1, COMMENTS_COUNT)).fill(null).map(() => createComment());
   return сomments;
 };
 
