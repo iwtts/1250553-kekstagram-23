@@ -5,10 +5,10 @@ const makeUniqueRandomIntegerGenerator = (min, max) => {
 
   return () => {
     let currentValue = getRandomPositiveInteger(min, max);
-    if (previousValues.length >= (max - min + 1)) {
-      throw new Error(`Перебраны все числа из диапазона от ${  min  } до ${  max}`);
-    }
     while (previousValues.includes(currentValue)) {
+      if (previousValues.length >= (max - min + 1)) {
+        break;
+      }
       currentValue = getRandomPositiveInteger(min, max);
     }
     previousValues.push(currentValue);
