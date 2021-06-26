@@ -1,3 +1,6 @@
+import {createBigPictureComments, clearCommentsList} from './create-big-picture-comments.js';
+import {isEscEvent} from './utils.js';
+
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureImageWrapper = document.querySelector('.big-picture__img');
 const bigPictureImage = bigPictureImageWrapper.querySelector('img');
@@ -10,28 +13,7 @@ const createBigPicture = function (source) {
   bigPictureLikesCount.textContent = source.likes;
   bigPictureCommentsCount.textContent = source.comments.length;
 
-  const commentsList = document.querySelector('.social__comments');
-  const commentTemplate = document.querySelector('.social__comment');
-  const comments = source.comments;
-  const commentsFragment = document.createDocumentFragment();
-
-  comments.forEach((comment) => {
-    const commentElement = commentTemplate.cloneNode(true);
-    const commentImage = commentElement.querySelector('.social__picture');
-    commentImage.src = comment.avatar;
-    commentImage.alt = comment.name;
-    const commentText = commentElement.querySelector('.social__text');
-    commentText.textContent = comment.message;
-
-    commentsFragment.appendChild(commentElement);
-  });
-
-  const commentTemplates= document.querySelectorAll('.social__comment');
-  commentTemplates.forEach((previousValue) => {
-    previousValue.remove();
-  });
-
-  commentsList.appendChild(commentsFragment);
+  createBigPictureComments(source);
 
   const bigPictureDescripion = document.querySelector('.social__caption');
   bigPictureDescripion.textContent = source.description;
@@ -44,18 +26,27 @@ const createBigPicture = function (source) {
   const body = document.querySelector('body');
   body.classList.add('modal-open');
 
-  const bigPictureCloseButton = document.querySelector('.big-picture__cancel');
-  bigPictureCloseButton.addEventListener('click', () => {
+  const onBigPicturekeydown = (evt) => {
+    if (isEscEvent(evt)) {
+      evt.preventDefault();
+      // eslint-disable-next-line no-use-before-define
+      bigPictureClose();
+    }
+  };
+
+  const bigPictureClose = function () {
     bigPicture.classList.add('hidden');
     body.classList.remove('modal-open');
+    document.removeEventListener('keydown', onBigPicturekeydown);
+    clearCommentsList();
+  };
+
+  const bigPictureCloseButton = document.querySelector('.big-picture__cancel');
+  bigPictureCloseButton.addEventListener('click', () => {
+    bigPictureClose();
   });
 
-  document.addEventListener('keydown', (evt) => {
-    if (evt.key === 'Escape') {
-      bigPicture.classList.add('hidden');
-      body.classList.remove('modal-open');
-    }
-  });
+  document.addEventListener('keydown', onBigPicturekeydown);
 };
 
 export {createBigPicture};

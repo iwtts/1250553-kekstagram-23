@@ -1,5 +1,6 @@
 import {createPhotos} from './get-random-data.js';
 import {createBigPicture} from './create-big-picture.js';
+import {isEnterEvent} from './utils.js';
 
 const thumbnails = document.querySelector('.pictures');
 const thumbnailTemplate = document.querySelector('#picture').content;
@@ -15,9 +16,18 @@ thumbnailPictures.forEach((photo) => {
   thumbnailImage.src = photo.url;
   thumbnailLikesCount.textContent = photo.likes;
   thumbnailCommentsCount.textContent = photo.comments.length;
+
   thumbnailImage.addEventListener('click', (evt) => {
     evt.preventDefault();
     createBigPicture(photo);
+  });
+
+  //спросить почему не получается
+  thumbnailImage.addEventListener('keydown', (evt) => {
+    if (isEnterEvent(evt)) {
+      evt.preventDefault();
+      createBigPicture(photo);
+    }
   });
 
   thumbnailsFragment.appendChild(thumbnailElement);

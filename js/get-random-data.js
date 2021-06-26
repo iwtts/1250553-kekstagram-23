@@ -1,8 +1,8 @@
-import {getRandomPositiveInteger} from './utils/get-random-positive-integer.js';
-import {makeUniqueRandomIntegerGenerator} from './utils/make-unique-random-integer-generator.js';
+import {getRandomPositiveInteger} from './utils.js';
+import {makeUniqueRandomIntegerGenerator} from './utils.js';
 
 const PHOTOS_COUNT = 25;
-const COMMENTS_COUNT = 3;
+const COMMENTS_COUNT = 15;
 const COMMENTS_COUNT_MAX = PHOTOS_COUNT * COMMENTS_COUNT;
 
 const COMMENT_MESSAGES = [
