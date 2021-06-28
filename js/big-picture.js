@@ -1,6 +1,8 @@
 import {createBigPictureComments, clearCommentsList} from './big-picture-comments.js';
 import {isEscEvent} from './utils.js';
 
+
+const body = document.querySelector('body');
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureImageWrapper = document.querySelector('.big-picture__img');
 const bigPictureImage = bigPictureImageWrapper.querySelector('img');
@@ -17,13 +19,6 @@ const createBigPicture = function (source) {
 
   const bigPictureDescripion = document.querySelector('.social__caption');
   bigPictureDescripion.textContent = source.description;
-
-  const bigPictureSocialCommentsCount = document.querySelector('.social__comment-count');
-  bigPictureSocialCommentsCount.classList.add('hidden');
-  const bigPictureSocialCommentsLoader = document.querySelector('.comments-loader');
-  bigPictureSocialCommentsLoader.classList.add('hidden');
-
-  const body = document.querySelector('body');
   body.classList.add('modal-open');
 
   const onBigPicturekeydown = (evt) => {
