@@ -1,4 +1,4 @@
-import {createBigPictureComments, clearCommentsList} from './create-big-picture-comments.js';
+import {createBigPictureComments, clearCommentsList} from './big-picture-comments.js';
 import {isEscEvent} from './utils.js';
 
 const bigPicture = document.querySelector('.big-picture');

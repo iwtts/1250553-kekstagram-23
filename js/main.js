@@ -1,2 +1,2 @@
-import './create-thumbnails.js';
+import './thumbnails.js';
 import './form.js';

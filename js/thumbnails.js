@@ -1,5 +1,5 @@
-import {createPhotos} from './get-random-data.js';
-import {createBigPicture} from './create-big-picture.js';
+import {createPhotos} from './random-data.js';
+import {createBigPicture} from './big-picture.js';
 import {isEnterEvent} from './utils.js';
 
 const thumbnails = document.querySelector('.pictures');

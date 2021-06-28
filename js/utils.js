@@ -38,3 +38,8 @@ const isEscEvent = (evt) => evt.key === 'Escape' || evt.key === 'Esc';
 const isEnterEvent = (evt) => evt.key === 'Enter';
 
 export {isEscEvent, isEnterEvent};
+
+
+const hasDuplicates = (array) => new Set(array).size !== array.length;
+
+export {hasDuplicates};
