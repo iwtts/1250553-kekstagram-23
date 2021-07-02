@@ -1,10 +1,9 @@
-import {createPhotos} from './random-data.js';
+//import {createPhotos} from './random-data.js';
 import {createBigPicture} from './big-picture.js';
 
-const createThumbnails = () => {
+const createThumbnails = (thumbnails ) => {
   const thumbnailsContainer = document.querySelector('.pictures');
   const thumbnailTemplate = document.querySelector('#picture').content;
-  const thumbnails = createPhotos();
   const thumbnailsFragment = document.createDocumentFragment();
 
   thumbnails.forEach((photo) => {
