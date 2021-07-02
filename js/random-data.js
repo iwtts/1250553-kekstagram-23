@@ -1,11 +1,19 @@
-import {getRandomPositiveInteger} from './utils.js';
-import {makeUniqueRandomIntegerGenerator} from './utils.js';
+import {
+  getRandomPositiveInteger,
+  makeUniqueRandomIntegerGenerator,
+  getRandomArrayElement
+} from './utils.js';
 
-const PHOTOS_COUNT = 25;
-const COMMENTS_COUNT = 15;
-const COMMENTS_COUNT_MAX = PHOTOS_COUNT * COMMENTS_COUNT;
+const PHOTOS_AMOUNT = 25;
+const COMMENTS_PER_PHOTO_MAX = 15;
+const COMMENTS_PER_PHOTO_MIN = 0;
+const LIKES_PER_PHOTO_MAX = 200;
+const LIKES_PER_PHOTO_MIN = 15;
+const COMMENTS_AMOUNT = PHOTOS_AMOUNT * COMMENTS_PER_PHOTO_MAX;
+const COMMENT_AVATAR_MAX = 6;
+const COMMENT_AVATAR_MIN = 1;
 
-const COMMENT_MESSAGES = [
+const CommentMessages = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -13,7 +21,7 @@ const COMMENT_MESSAGES = [
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
-const COMMENT_NAMES = [
+const CommentNames = [
   'Ричард Керн',
   'Энни Лейбовиц',
   'Патрик Демаршелье',
@@ -22,32 +30,32 @@ const COMMENT_NAMES = [
   'Диана Арбус',
 ];
 
-const getCommentId = makeUniqueRandomIntegerGenerator(0, COMMENTS_COUNT_MAX);
-const getPhotoId = makeUniqueRandomIntegerGenerator(0, PHOTOS_COUNT);
-const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0, elements.length - 1)];
+const getCommentId = makeUniqueRandomIntegerGenerator(1, COMMENTS_AMOUNT);
+const getPhotoId = makeUniqueRandomIntegerGenerator(1, PHOTOS_AMOUNT);
+const getPhotoUrl = makeUniqueRandomIntegerGenerator(1, PHOTOS_AMOUNT);
 
 const createComment = () => ({
   id: getCommentId(),
-  avatar: `img/avatar-${  getRandomPositiveInteger(1, 6)  }.svg`,
-  message: getRandomArrayElement(COMMENT_MESSAGES),
-  name: getRandomArrayElement(COMMENT_NAMES),
+  avatar: `img/avatar-${  getRandomPositiveInteger(COMMENT_AVATAR_MIN, COMMENT_AVATAR_MAX)  }.svg`,
+  message: getRandomArrayElement(CommentMessages),
+  name: getRandomArrayElement(CommentNames),
 });
 
 const createComments = () => {
-  const сomments = new Array(getRandomPositiveInteger(1, COMMENTS_COUNT)).fill(null).map(() => createComment());
+  const сomments = new Array(getRandomPositiveInteger(COMMENTS_PER_PHOTO_MIN, COMMENTS_PER_PHOTO_MAX)).fill(null).map(() => createComment());
   return сomments;
 };
 
 const createPhoto = () => ({
   id: getPhotoId(),
-  url: `photos/${  getRandomPositiveInteger(1, 25) }.jpg`,
+  url: `photos/${  getPhotoUrl() }.jpg`,
   description: 'Такое искусство, если угодно, оказывается трансперсональным и трансцендентным.',
-  likes: getRandomPositiveInteger(15, 200),
+  likes: getRandomPositiveInteger(LIKES_PER_PHOTO_MIN, LIKES_PER_PHOTO_MAX),
   comments: createComments(),
 });
 
 const createPhotos = () => {
-  const photos = new Array(PHOTOS_COUNT).fill(null).map(() => createPhoto());
+  const photos = new Array(PHOTOS_AMOUNT).fill(null).map(() => createPhoto());
   return photos;
 };
 
