@@ -168,7 +168,6 @@ const effectChangeHandler = function (evt) {
 
 effectsList.addEventListener('change', effectChangeHandler);
 
-
 commentInput.addEventListener('input', () => {
   if (commentInput.value.length > COMMENT_MAX_LENGTH) {
     commentInput.setCustomValidity('Длина комментария не должна превышать 140 символов');

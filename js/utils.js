@@ -1,23 +1,20 @@
-function checkStringLength (string, length) {
-  return string.length <= length;
-}
+const checkStringLength = (string, length) => string.length <= length;
 
-export {checkStringLength};
+const isEscEvent = (evt) => evt.key === 'Escape' || evt.key === 'Esc';
 
+const hasDuplicates = (array) => new Set(array).size !== array.length;
 
-function getRandomPositiveInteger (min, max) {
+const getRandomPositiveInteger = (min, max) => {
   const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
   const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
   const result = Math.random() * (upper - lower + 1) + lower;
   return Math.floor(result);
-}
+};
 
-export {getRandomPositiveInteger};
+const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0, elements.length - 1)];
 
-
-function makeUniqueRandomIntegerGenerator (min, max) {
+const makeUniqueRandomIntegerGenerator = (min, max) => {
   const previousValues = [];
-
   return () => {
     let currentValue = getRandomPositiveInteger(min, max);
     while (previousValues.includes(currentValue)) {
@@ -29,17 +26,13 @@ function makeUniqueRandomIntegerGenerator (min, max) {
     previousValues.push(currentValue);
     return currentValue;
   };
-}
+};
 
-export {makeUniqueRandomIntegerGenerator};
-
-
-const isEscEvent = (evt) => evt.key === 'Escape' || evt.key === 'Esc';
-const isEnterEvent = (evt) => evt.key === 'Enter';
-
-export {isEscEvent, isEnterEvent};
-
-
-const hasDuplicates = (array) => new Set(array).size !== array.length;
-
-export {hasDuplicates};
+export {
+  checkStringLength,
+  isEscEvent,
+  hasDuplicates,
+  getRandomPositiveInteger,
+  getRandomArrayElement,
+  makeUniqueRandomIntegerGenerator
+};
