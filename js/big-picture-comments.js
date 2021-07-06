@@ -27,7 +27,4 @@ const createBigPictureComments = function (source) {
   defineVisibility(source);
 };
 
-export {
-  createBigPictureComments,
-  clearCommentsList
-};
+export {createBigPictureComments, clearCommentsList};
