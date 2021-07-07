@@ -1,4 +1,3 @@
-
 const getData = (onSuccess) => {
   fetch('https://23.javascript.pages.academy/kekstagram/data')
     .then((response) => response.json())
@@ -20,11 +19,11 @@ const sendData = (onSuccess, onFail, body) => {
       if (response.ok) {
         onSuccess();
       } else {
-        onFail('Не удалось отправить форму. Попробуйте ещё раз');
+        onFail();
       }
     })
     .catch (() => {
-      onFail('Не удалось отправить форму. Попробуйте ещё раз');
+      onFail();
     });
 };
 

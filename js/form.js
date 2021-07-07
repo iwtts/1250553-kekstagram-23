@@ -1,6 +1,6 @@
 import '../nouislider/nouislider.js';
 import {isEscEvent} from './utils.js';
-import {sendData} from './api.js';
+import {sendData} from './data.js';
 import {checkHastagsValidity, checkCommentValidity} from './validation.js';
 import {effectChangeHandler, clearPictureEffects} from './effects.js';
 import {defineImageScale, clearPictureScale} from './scale.js';
