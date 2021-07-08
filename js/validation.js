@@ -8,9 +8,9 @@ const COMMENT_MAX_LENGTH = 140;
 const checkHastagsValidity = (hashtagInput) => {
   const hashtags = hashtagInput.value.toLowerCase().split(' ');
   const hashtagRestrictions = /^#[A-Za-zА-Яа-я0-9]{1,19}$/;
-  const checkHashtagRestrictions = hashtags.some((hashtag) => hashtagRestrictions.test(hashtag));
-  const checkHashtagMaxLength = hashtags.some((hashtag) => hashtag.length < HASHTAG_MAX_LENGTH);
-  const checkHashtagMinLength = hashtags.some((hashtag) => hashtag.length > HASHTAG_MIN_LENGTH);
+  const checkHashtagRestrictions = hashtags.every((hashtag) => hashtagRestrictions.test(hashtag));
+  const checkHashtagMaxLength = hashtags.every((hashtag) => hashtag.length < HASHTAG_MAX_LENGTH);
+  const checkHashtagMinLength = hashtags.every((hashtag) => hashtag.length >= HASHTAG_MIN_LENGTH);
 
   if (!checkHashtagRestrictions) {
     hashtagInput.setCustomValidity('Хэштэг должен состоять только из букв и цифр и начинаться с #');
