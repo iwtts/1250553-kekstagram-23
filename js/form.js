@@ -5,6 +5,8 @@ import {checkHastagsValidity, checkCommentValidity} from './validation.js';
 import {effectChangeHandler, clearPictureEffects} from './effects.js';
 import {defineImageScale, clearPictureScale} from './scale.js';
 
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+
 const body = document.querySelector('body');
 const uploadFile = document.querySelector('.img-upload__input');
 const uploadOverlay = document.querySelector('.img-upload__overlay');
@@ -12,6 +14,9 @@ const uploadCancel = document.querySelector('.img-upload__cancel');
 const hashtagInput = document.querySelector('.text__hashtags');
 const commentInput = document.querySelector('.text__description');
 const scaleValue = document.querySelector('.scale__control--value');
+
+const uploadImagePreviewWrapper = document.querySelector('.img-upload__preview');
+const uploadImagePreview = uploadImagePreviewWrapper.querySelector('img');
 
 const uploadForm = document.querySelector('.img-upload__form');
 
@@ -44,6 +49,20 @@ uploadFile.addEventListener('change', () => {
   uploadCancel.addEventListener('click', uploadFileClose);
 
   document.addEventListener('keydown', onUploadFileEscKeydown);
+
+  const file = uploadFile.files[0];
+  const fileName = file.name.toLowerCase();
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+
+  if (matches) {
+    const reader = new FileReader();
+
+    reader.addEventListener('load', () => {
+      uploadImagePreview.src = reader.result;
+    });
+
+    reader.readAsDataURL(file);
+  }
 });
 
 defineImageScale();
