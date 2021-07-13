@@ -18,7 +18,7 @@ noUiSlider.create(effectsLevelSlider, {
 });
 
 
-const effectChangeHandler = function (evt) {
+const onEffectListChange = (evt) => {
   switch (evt.target.value ) {
     case 'none':
       effectsLevelSliderWrapper.classList.add('hidden');
@@ -84,7 +84,7 @@ const effectChangeHandler = function (evt) {
       uploadImagePreview.className = 'effects__preview--heat';
       effectsLevelSlider.noUiSlider.updateOptions({
         range: {
-          min: 0,
+          min: 1,
           max: 3,
         },
         start: 3,
@@ -105,4 +105,4 @@ const clearPictureEffects = () => {
   uploadImagePreview.style.filter = '';
 };
 
-export{effectChangeHandler, clearPictureEffects};
+export{onEffectListChange, clearPictureEffects};

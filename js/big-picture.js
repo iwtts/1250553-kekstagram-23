@@ -9,7 +9,7 @@ const bigPictureImage = bigPictureImageWrapper.querySelector('img');
 const bigPictureLikesCount = document.querySelector('.likes-count');
 const bigPictureCommentsCount = document.querySelector('.comments-count');
 
-const createBigPicture = function (source) {
+const createBigPicture = (source) => {
   bigPicture.classList.remove('hidden');
   bigPictureImage.src = source.url;
   bigPictureLikesCount.textContent = source.likes;
@@ -25,11 +25,11 @@ const createBigPicture = function (source) {
     if (isEscEvent(evt)) {
       evt.preventDefault();
       // eslint-disable-next-line no-use-before-define
-      bigPictureClose();
+      onBigPictureCloseClick();
     }
   };
 
-  const bigPictureClose = function () {
+  const onBigPictureCloseClick = () => {
     bigPicture.classList.add('hidden');
     body.classList.remove('modal-open');
     document.removeEventListener('keydown', onBigPicturekeydown);
@@ -37,9 +37,7 @@ const createBigPicture = function (source) {
   };
 
   const bigPictureCloseButton = document.querySelector('.big-picture__cancel');
-  bigPictureCloseButton.addEventListener('click', () => {
-    bigPictureClose();
-  });
+  bigPictureCloseButton.addEventListener('click', onBigPictureCloseClick);
 
   document.addEventListener('keydown', onBigPicturekeydown);
 };

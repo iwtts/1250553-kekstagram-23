@@ -1,79 +1,75 @@
-import { isEscEvent} from './utils.js';
+import {isEscEvent} from './utils.js';
 
 const body = document.querySelector('body');
 
 const setUpSuccessPopUp = () => {
   const successPopUpTemplate = document.querySelector('#success').content;
-  const successPopUpFragment = document.createDocumentFragment();
   const successPopup = successPopUpTemplate.cloneNode(true);
 
-  successPopUpFragment.appendChild(successPopup);
-  body.appendChild(successPopUpFragment);
+  body.appendChild(successPopup);
 
   const successPopupWrapper = document.querySelector('.success');
 
-  const successPopupClose = () => {
+  const onSuccessPopupCloseClick = () => {
     body.removeChild(successPopupWrapper);
     // eslint-disable-next-line no-use-before-define
     document.removeEventListener('keydown', onSuccessPopUpEscKeydown);
     // eslint-disable-next-line no-use-before-define
-    document.removeEventListener('click', outsideSuccesPopUpPopupClick);
+    document.removeEventListener('click', onOutsideSuccesPopUpPopupClick);
   };
 
   const onSuccessPopUpEscKeydown = (evt) => {
     if (isEscEvent(evt)) {
-      successPopupClose();
+      onSuccessPopupCloseClick();
     }
   };
 
-  const outsideSuccesPopUpPopupClick = (evt) => {
+  const onOutsideSuccesPopUpPopupClick = (evt) => {
     if (evt.taget !== successPopupWrapper) {
-      successPopupClose();
+      onSuccessPopupCloseClick();
     }
   };
 
   const successPopupCloseButton = document.querySelector('.success__button');
-  successPopupCloseButton.addEventListener ('click', successPopupClose);
+  successPopupCloseButton.addEventListener ('click', onSuccessPopupCloseClick);
 
   document.addEventListener('keydown', onSuccessPopUpEscKeydown);
-  document.addEventListener('click', outsideSuccesPopUpPopupClick);
+  document.addEventListener('click', onOutsideSuccesPopUpPopupClick);
 };
 
 const setUpFailPopUp = () => {
   const errorPopUpTemplate = document.querySelector('#error').content;
-  const errorPopUpFragment = document.createDocumentFragment();
   const errorPopUp = errorPopUpTemplate.cloneNode(true);
 
-  errorPopUpFragment.appendChild(errorPopUp);
-  body.appendChild(errorPopUpFragment);
+  body.appendChild(errorPopUp);
 
   const errorPopUpWrapper = document.querySelector('.error');
 
-  const errorPopUpClose = () => {
+  const onErrorPopUpCloseClick = () => {
     body.removeChild(errorPopUpWrapper);
     // eslint-disable-next-line no-use-before-define
     document.removeEventListener('keydown', onErrorPopUpEscKeydown);
     // eslint-disable-next-line no-use-before-define
-    document.removeEventListener('click', outsideErrorPopUpPopupClick);
+    document.removeEventListener('click', onOutsideErrorPopUpPopupClick);
   };
 
   const onErrorPopUpEscKeydown = (evt) => {
     if (isEscEvent(evt)) {
-      errorPopUpClose();
+      onErrorPopUpCloseClick();
     }
   };
 
-  const outsideErrorPopUpPopupClick = (evt) => {
+  const onOutsideErrorPopUpPopupClick = (evt) => {
     if (evt.taget !== errorPopUpWrapper) {
-      errorPopUpClose();
+      onErrorPopUpCloseClick();
     }
   };
 
   const errorPopupCloseButton = document.querySelector('.error__button');
-  errorPopupCloseButton.addEventListener ('click', errorPopUpClose);
+  errorPopupCloseButton.addEventListener ('click', onErrorPopUpCloseClick);
 
   document.addEventListener('keydown', onErrorPopUpEscKeydown);
-  document.addEventListener('click', outsideErrorPopUpPopupClick);
+  document.addEventListener('click', onOutsideErrorPopUpPopupClick);
 };
 
 export {setUpSuccessPopUp, setUpFailPopUp };

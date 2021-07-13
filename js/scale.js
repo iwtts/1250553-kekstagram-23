@@ -2,6 +2,8 @@ const SCALE_STEP = 0.25;
 const DEFAULT_SCALE_VALUE = '100%';
 const MAX_SCALE_VALUE = '100%';
 const MIN_SCALE_VALUE = '25%';
+const MAX_SCALE_ADJUSTER_VALUE = parseInt(MAX_SCALE_VALUE, 10) / 100;
+const MIN_SCALE_ADJUSTER_VALUE = parseInt(MIN_SCALE_VALUE, 10) / 100;
 
 const scaleValue = document.querySelector('.scale__control--value');
 
@@ -19,7 +21,7 @@ const defineImageScale = () => {
     uploadImagePreview.style.transform = `scale(${ scaleAdjuster })`;
     scaleValue.value = `${ scaleAdjuster * 100 }%`;
     if (parseInt(scaleValue.value, 10) <= parseInt(MIN_SCALE_VALUE, 10)) {
-      scaleAdjuster = 0.25;
+      scaleAdjuster = MIN_SCALE_ADJUSTER_VALUE;
       uploadImagePreview.style.transform = `scale(${ scaleAdjuster})`;
       scaleValue.value = `${ scaleAdjuster * 100 }%`;
     }
@@ -30,7 +32,7 @@ const defineImageScale = () => {
     uploadImagePreview.style.transform = `scale(${ scaleAdjuster })`;
     scaleValue.value = `${ scaleAdjuster * 100 }%`;
     if (parseInt(scaleValue.value, 10) >= parseInt(MAX_SCALE_VALUE, 10)) {
-      scaleAdjuster = 1;
+      scaleAdjuster = MAX_SCALE_ADJUSTER_VALUE;
       uploadImagePreview.style.transform = `scale(${ scaleAdjuster })`;
       scaleValue.value = `${ scaleAdjuster * 100 }%`;
     }

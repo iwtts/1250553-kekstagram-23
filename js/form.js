@@ -2,10 +2,11 @@ import '../nouislider/nouislider.js';
 import {isEscEvent} from './utils.js';
 import {sendData} from './data.js';
 import {checkHastagsValidity, checkCommentValidity} from './validation.js';
-import {effectChangeHandler, clearPictureEffects} from './effects.js';
+import {onEffectListChange, clearPictureEffects} from './effects.js';
 import {defineImageScale, clearPictureScale} from './scale.js';
 
-const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+const FILES_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+const DEFAULT_SCALE_VALUE = '100%';
 
 const body = document.querySelector('body');
 const uploadFile = document.querySelector('.img-upload__input');
@@ -23,7 +24,7 @@ const uploadForm = document.querySelector('.img-upload__form');
 const effectsList = document.querySelector('.effects__list');
 const effectsLevelSliderWrapper = document.querySelector('.img-upload__effect-level ');
 
-const uploadFileClose = function () {
+const onUploadFileCloseClick = () => {
   uploadOverlay.classList.add('hidden');
   body.classList.remove('modal-open');
   uploadFile.value = '';
@@ -37,22 +38,22 @@ const uploadFileClose = function () {
 
 const onUploadFileEscKeydown = (evt) => {
   if (isEscEvent(evt)) {
-    uploadFileClose();
+    onUploadFileCloseClick();
   }
 };
 
 uploadFile.addEventListener('change', () => {
-  scaleValue.value = '100%';
+  scaleValue.value = DEFAULT_SCALE_VALUE;
   uploadOverlay.classList.remove('hidden');
   body.classList.add('modal-open');
 
-  uploadCancel.addEventListener('click', uploadFileClose);
+  uploadCancel.addEventListener('click', onUploadFileCloseClick);
 
   document.addEventListener('keydown', onUploadFileEscKeydown);
 
   const file = uploadFile.files[0];
   const fileName = file.name.toLowerCase();
-  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+  const matches = FILES_TYPES.some((it) => fileName.endsWith(it));
 
   if (matches) {
     const reader = new FileReader();
@@ -69,7 +70,7 @@ defineImageScale();
 
 effectsLevelSliderWrapper.classList.add('hidden');
 
-effectsList.addEventListener('change', effectChangeHandler);
+effectsList.addEventListener('change', onEffectListChange);
 
 commentInput.addEventListener('input', () => {
   checkCommentValidity(commentInput);
@@ -101,9 +102,9 @@ const setUploadFormSubmit = (onSuccess, onFail) => {
       new FormData(evt.target),
     );
 
-    uploadFileClose();
+    onUploadFileCloseClick();
   });
 };
 
-export {setUploadFormSubmit, uploadFileClose};
+export {setUploadFormSubmit, onUploadFileCloseClick};
 

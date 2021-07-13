@@ -1,4 +1,3 @@
-import './form.js';
 import {createThumbnails} from './thumbnails.js';
 import {setUploadFormSubmit} from './form.js';
 import {setUpSuccessPopUp, setUpFailPopUp} from './picture-upload-popups.js';

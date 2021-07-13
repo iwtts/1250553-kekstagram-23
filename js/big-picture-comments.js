@@ -5,7 +5,7 @@ const commentTemplate = document.querySelector('.social__comment');
 
 const clearCommentsList = () => commentsList.innerHTML = '';
 
-const createBigPictureComments = function (source) {
+const createBigPictureComments = (source) => {
   const comments = source.comments;
   const commentsFragment = document.createDocumentFragment();
 

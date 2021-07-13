@@ -1,5 +1,5 @@
 import {createBigPicture} from './big-picture.js';
-import { setUpImageFilters } from './filters.js';
+import {setUpImageFilters} from './filters.js';
 
 const createThumbnails = (thumbnails ) => {
   setUpImageFilters ();

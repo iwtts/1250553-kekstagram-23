@@ -1,8 +1,9 @@
 import {createThumbnails} from './thumbnails.js';
 import {getData} from './data.js';
-import {debounce} from './debounce.js';
+import {debounce} from './utils.js';
 
 const RERENDER_DELAY = 500;
+const RANDOM_PHOTOS_COUNT = 10;
 
 const sortByDefaultButton = document.querySelector('#filter-default');
 const sortByRandomButton = document.querySelector('#filter-random');
@@ -33,10 +34,10 @@ const setUpDefaultFilter = () => {
   });
 };
 
-const mixArray = (array) => array.map((currentIndex)=>[Math.random(), currentIndex]).sort().map((currentIndex)=>currentIndex[1]);
+const mixArray = (array) => array.sort(() => Math.random() - 0.5);
 const applyRandomFilter = debounce(() => {
   getData ((photos) => {
-    createThumbnails(mixArray(photos).slice(0, 10));
+    createThumbnails(mixArray(photos).slice(0, RANDOM_PHOTOS_COUNT));
   });
 }, RERENDER_DELAY);
 
