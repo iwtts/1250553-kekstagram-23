@@ -6,6 +6,8 @@ const isEscEvent = (evt) => evt.key === 'Escape' || evt.key === 'Esc';
 
 const hasDuplicates = (array) => new Set(array).size !== array.length;
 
+const hasEmptyElements = (array) => array.some((element) => element === '');
+
 const getRandomPositiveInteger = (min, max) => {
   const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
   const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
@@ -64,6 +66,7 @@ export {
   checkStringLength,
   isEscEvent,
   hasDuplicates,
+  hasEmptyElements,
   getRandomPositiveInteger,
   getRandomArrayElement,
   makeUniqueRandomIntegerGenerator,

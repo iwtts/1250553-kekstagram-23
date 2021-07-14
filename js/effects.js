@@ -27,7 +27,12 @@ const onEffectListChange = (evt) => {
       break;
     case 'chrome':
       effectsLevelSlider.noUiSlider.updateOptions({
-        start: 100,
+        range: {
+          min: 0,
+          max: 1,
+        },
+        start: 1,
+        step: 0.1,
       });
       effectsLevelSliderWrapper.classList.remove('hidden');
       uploadImagePreview.className = 'effects__preview--chrome';
@@ -38,7 +43,12 @@ const onEffectListChange = (evt) => {
       break;
     case 'sepia':
       effectsLevelSlider.noUiSlider.updateOptions({
-        start: 100,
+        range: {
+          min: 0,
+          max: 1,
+        },
+        start: 1,
+        step: 0.1,
       });
       effectsLevelSliderWrapper.classList.remove('hidden');
       uploadImagePreview.className = 'effects__preview--sepia';

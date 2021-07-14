@@ -1,4 +1,4 @@
-import {hasDuplicates, checkStringLength} from './utils.js';
+import {hasDuplicates, hasEmptyElements, checkStringLength} from './utils.js';
 
 const HASHTAGS_MAX_COUNT = 5;
 const HASHTAG_MAX_LENGTH = 20;
@@ -12,24 +12,27 @@ const checkHastagsValidity = (hashtagInput) => {
   const hashtags = hashtagInput.value.trim().toLowerCase().split(' ');
   const hashtagRestrictions = /^#[A-Za-zА-Яа-я0-9]{1,19}$/;
 
-  const checkHashtagRestrictions = hashtags.every((hashtag) => hashtagRestrictions.test(hashtag));
-  const checkHashtagMaxLength = hashtags.every((hashtag) => hashtag.length < HASHTAG_MAX_LENGTH);
-  const checkHashtagMinLength = hashtags.every((hashtag) => hashtag.length >= HASHTAG_MIN_LENGTH);
+  const isValidRestrictions = hashtags.every((hashtag) => hashtagRestrictions.test(hashtag));
+  const isValidMaxLength = hashtags.every((hashtag) => hashtag.length < HASHTAG_MAX_LENGTH);
+  const isValidMinLength = hashtags.every((hashtag) => hashtag.length >= HASHTAG_MIN_LENGTH);
 
-  if (hashtags.length > HASHTAGS_MAX_COUNT) {
+  if (hasEmptyElements(hashtags)) {
+    hashtagInput.setCustomValidity('Хэштеги должны разделяться одним пробелом');
+    setInvalidStyle(hashtagInput);
+  } else if (hashtags.length > HASHTAGS_MAX_COUNT) {
     hashtagInput.setCustomValidity('Нельзя указать больше пяти хэш-тегов');
     setInvalidStyle(hashtagInput);
-  } else if (!checkHashtagMaxLength) {
+  } else if (!isValidMaxLength) {
     hashtagInput.setCustomValidity(`Хэш тэг не может быть длинее ${  HASHTAG_MAX_LENGTH  } символов`);
     setInvalidStyle(hashtagInput);
-  } else if (!checkHashtagMinLength) {
+  } else if (!isValidMinLength) {
     hashtagInput.setCustomValidity(`Хэш тэг не может быть короче ${  HASHTAG_MIN_LENGTH  } символов`);
     setInvalidStyle(hashtagInput);
-  } else if (!checkHashtagRestrictions) {
+  } else if (!isValidRestrictions) {
     hashtagInput.setCustomValidity('Хэштэг должен состоять только из букв и цифр и начинаться с #');
     setInvalidStyle(hashtagInput);
   } else if (hasDuplicates(hashtags)) {
-    hashtagInput.setCustomValidity('Хэштеги должны быть уникальными.');
+    hashtagInput.setCustomValidity('Хэштеги должны быть уникальными');
     setInvalidStyle(hashtagInput);
   } else {
     hashtagInput.setCustomValidity('');

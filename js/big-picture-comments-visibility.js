@@ -23,15 +23,8 @@ const defineVisibility = (source) => {
     });
   };
 
-  const countVisibleComments = () => {
-    let visibleCommentsCount  = 0;
-    for (let commentId = 0; commentId < bigPictureComments.length; commentId++) {
-      if (!bigPictureComments[commentId].classList.contains('hidden')) {
-        visibleCommentsCount ++;
-      }
-    }
-    return visibleCommentsCount ;
-  };
+  const countVisibleComments = () => Array.from(bigPictureComments)
+    .reduce((accumulator, comment) => accumulator + 1 - comment.classList.contains('hidden'), 0);
 
   const countInvisibleComments = () => comments.length - countVisibleComments();
 

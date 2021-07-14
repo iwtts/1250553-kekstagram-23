@@ -101,7 +101,7 @@ const setUploadFormSubmit = (onSuccess, onFail) => {
       () => onFail(),
       new FormData(evt.target),
     );
-
+    hashtagInput.value.trim();
     onUploadFileCloseClick();
   });
 };
