@@ -95,13 +95,13 @@ hashtagInput.addEventListener('keydown', (evt) =>{
 const setUploadFormSubmit = (onSuccess, onFail) => {
   uploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
+    hashtagInput.value = hashtagInput.value.trim();
 
     sendData(
       () => onSuccess(),
       () => onFail(),
       new FormData(evt.target),
     );
-    hashtagInput.value.trim();
     onUploadFileCloseClick();
   });
 };
