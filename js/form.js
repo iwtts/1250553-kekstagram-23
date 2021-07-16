@@ -95,7 +95,7 @@ hashtagInput.addEventListener('keydown', (evt) =>{
 const setUploadFormSubmit = (onSuccess, onFail) => {
   uploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
-    hashtagInput.value = hashtagInput.value.trim();
+    hashtagInput.value = hashtagInput.value.split(' ').filter((hashtag) => hashtag !== '').join(' ');
 
     sendData(
       () => onSuccess(),
