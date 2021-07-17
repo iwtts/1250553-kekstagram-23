@@ -21,11 +21,11 @@ const checkHastagsValidity = (hashtagInput) => {
   if (comprisesOnlyHash) {
     hashtagInput.setCustomValidity('Хеш-тег не может состоять только из одной решётки');
     setInvalidStyle(hashtagInput);
-  } else if (!isValidRestrictions) {
-    hashtagInput.setCustomValidity('Хэш-тэг должен состоять только из букв и цифр и начинаться с #');
-    setInvalidStyle(hashtagInput);
   } else if (!isValidMaxLength) {
     hashtagInput.setCustomValidity(`Хэш-тэг не может быть длинее ${  HASHTAG_MAX_LENGTH  } символов`);
+    setInvalidStyle(hashtagInput);
+  } else if (!isValidRestrictions) {
+    hashtagInput.setCustomValidity('Хэш-тэг должен состоять только из букв и цифр и начинаться с #');
     setInvalidStyle(hashtagInput);
   }  else if (!isValidMinLength) {
     hashtagInput.setCustomValidity(`Хэш-тэг не может быть короче ${  HASHTAG_MIN_LENGTH  } символов`);
